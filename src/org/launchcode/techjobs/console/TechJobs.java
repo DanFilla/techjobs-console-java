@@ -36,8 +36,7 @@ public class TechJobs {
                 String columnChoice = getUserSelection("List", columnChoices);
 
                 if (columnChoice.equals("all")) {
-                    JobData.findAll();
-                    System.out.println(JobData.findAll());
+                    printJobs(JobData.findAll());
                 } else {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
