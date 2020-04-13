@@ -7,9 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -76,11 +74,36 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            String laValue = aValue.toLowerCase();
+            String lvalue = value.toLowerCase();
+
+            if (laValue.contains(lvalue)) {
                 jobs.add(row);
             }
         }
 
+        return jobs;
+    }
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+            for (String col : row.values()) {
+
+                String lcol = col.toLowerCase();
+                String lvalue = value.toLowerCase();
+
+                if (lcol.contains(lvalue)) {
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
         return jobs;
     }
 
@@ -114,6 +137,16 @@ public class JobData {
                 }
 
                 allJobs.add(newJob);
+
+//                Collections.sort(newJob, new Comparator<Map <String, String>>{
+//                    public int compare(String newJob, String newJob1) {
+//                        int name = newJob.getValues().compareTo(newJob1.getName());
+//                        if(name == 0){
+//                            return name;
+//                        }
+//                        return newJob.getAge() > person1.getAge() ? 1 : person.getAge() < person1.getAge() ? -1 : 0;
+//                    }
+//                });
             }
 
             // flag the data as loaded, so we don't do it twice
