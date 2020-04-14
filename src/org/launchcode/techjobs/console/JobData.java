@@ -135,18 +135,7 @@ public class JobData {
                 for (String headerLabel : headers) {
                     newJob.put(headerLabel, record.get(headerLabel));
                 }
-
                 allJobs.add(newJob);
-
-//                Collections.sort(newJob, new Comparator<Map <String, String>>{
-//                    public int compare(String newJob, String newJob1) {
-//                        int name = newJob.getValues().compareTo(newJob1.getName());
-//                        if(name == 0){
-//                            return name;
-//                        }
-//                        return newJob.getAge() > person1.getAge() ? 1 : person.getAge() < person1.getAge() ? -1 : 0;
-//                    }
-//                });
             }
 
             // flag the data as loaded, so we don't do it twice
